@@ -17,3 +17,9 @@ export function PUT() {
         message: "updating task..."
     })
 }
+
+export function DELETE() {
+    return NextResponse.json({
+        message: "deleting task..."
+    })
+}
