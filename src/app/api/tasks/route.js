@@ -1,17 +1,27 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/utils/mongoose";
+import { Task } from "@/models/Task";
 
-export function GET() {
+export async function GET() {
     connectDB();
-    return NextResponse.json({
-        message: "getting tasks..."
-    }).status(200);
+    const tasks = await Task.find({});
+    return NextResponse.json(tasks).status(200);
 }
 
-export function POST() {
+export async function POST(request) {
+    try {
+    const data = await request.json()
+    const newTask = new Task(data);
+    const saveTask = await newTask.save()
     return NextResponse.json({
         message: "creating task..."
     })
+    } catch (error) {
+        return NextResponse.json({
+            error: error.message,
+            status:400
+    })
+}
 }
 
 export function PUT() {

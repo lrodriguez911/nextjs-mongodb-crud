@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const taskSchema = new Schema(
   {
@@ -17,4 +17,5 @@ const taskSchema = new Schema(
   { timestamps: true }
 );
 
-export default taskSchema;
+
+export default models.Task ||new model("Task", taskSchema);
