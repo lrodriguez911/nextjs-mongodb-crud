@@ -24,7 +24,12 @@ export async function POST(request) {
 }
 }
 
-export function PUT() {
+export function PUT(request) {
+    try {
+        
+    } catch (error) {
+        
+    }
     return NextResponse.json({
         message: "updating task..."
     })
