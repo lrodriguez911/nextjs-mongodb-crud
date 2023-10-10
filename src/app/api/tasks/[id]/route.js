@@ -35,12 +35,16 @@ export function DELETE(request, { params }) {
   });
 }
 
-export function PUT(request, { params }) {
-  const { id, name, description } = params;
-  const task = find(id);
-  task.name = name;
-  task.description = description;
-  return NextResponse.json({
-    message: `Updating task ${id}`,
+export async function PUT(request, { params }) {
+  try {
+    const data = await request.json();
+  const taskUpdate = await Task.findByIdAndUpdate(params.id, data, {
+    new: true,
   });
+  return NextResponse.json(taskUpdate);
+  } catch (error) {
+    return NextResponse.json(error.message, {
+      status: 400
+    })
+  }
 }
