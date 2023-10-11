@@ -28,11 +28,20 @@ export async function GET(request, { params }) {
   }
 }
 
-export function DELETE(request, { params }) {
-  const id = params.id;
-  return NextResponse.json({
-    message: `Deleting task ${id}`,
-  });
+export async function DELETE(request, { params }) {
+  try {
+    const taskDeleted = await Task.findByIdAndDelete(params.id);
+  if (!taskDeleted) {
+    return NextResponse.json({
+      message: `Task not found ${params.id}`
+  }, {status: 404})
+  }
+  return NextResponse.json(taskDeleted);
+  } catch (error) {
+    return NextResponse.json(error.message, {
+      status:400
+    })
+  }
 }
 
 export async function PUT(request, { params }) {
