@@ -1,6 +1,17 @@
-function Homepage() {
+import {connectDB} from '@/utils/mongoose'
+import Task from "@/models/Task";
+
+async function loadTasks(){
+  connectDB()
+  const tasks = await Task.find()
+  return tasks
+}
+
+async function Homepage() {
+  const tasks = await loadTasks()
   return (
-    <div>Homepage</div>
+    <div>{
+      JSON.stringify(tasks)}</div>
   )
 }
 
