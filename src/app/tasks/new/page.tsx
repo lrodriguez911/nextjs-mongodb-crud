@@ -1,11 +1,13 @@
 "use client";
 import { ChangeEvent , FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation';
+
 function FormPage() {
   const [newTask, setNewTask] = useState({
     title: "",
     description: ""
   })
+  const router = useRouter()
   const createTask = async () => {
     const res = await fetch('api/tasks/', {
       method: "POST",
@@ -14,7 +16,11 @@ function FormPage() {
         "Content-Type": "application/json"
       }
     })
-    console.log(res);
+    const data = await res.json()
+
+    router.push("/")
+    console.log(data);
+    
   }
 
 
