@@ -9,6 +9,21 @@ function FormPage() {
   })
   const router = useRouter()
   const createTask = async () => {
+    try {
+      const res = await fetch('api/tasks/', {
+        method: "POST",
+        body: JSON.stringify(newTask),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const data = await res.json()
+  
+      router.push("/")
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
     const res = await fetch('api/tasks/', {
       method: "POST",
       body: JSON.stringify(newTask),
