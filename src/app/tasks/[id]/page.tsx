@@ -1,4 +1,5 @@
 import FormPage from '../new/page'
+import React from 'react'
 
 function TaskView() {
   return (
@@ -7,3 +8,4 @@ function TaskView() {
 }
 
 export default TaskView
+
