@@ -1,6 +1,6 @@
 "use client";
-import { ChangeEvent , FormEvent, useState } from 'react'
-import { useRouter } from 'next/navigation';
+import { ChangeEvent , FormEvent, useState, useEffect } from 'react'
+import { useRouter, useParams } from 'next/navigation';
 
 function FormPage() {
   const [newTask, setNewTask] = useState({
@@ -8,6 +8,8 @@ function FormPage() {
     description: ""
   })
   const router = useRouter()
+  const params = useParams()
+
   const createTask = async () => {
     try {
       const res = await fetch('api/tasks/', {
@@ -54,6 +56,11 @@ function FormPage() {
     })
   
   }
+
+  useEffect(() => {
+    console.log(params);
+    
+  },[])
   return (
     <div className='h-[calc(100vh-7rem)] flex justify-center items-center'>
         <form onSubmit={}>
