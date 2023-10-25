@@ -43,6 +43,10 @@ function FormPage() {
     
   }
 
+  const handleDelete = async () => {
+    console.log("deleting");
+    
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -64,7 +68,10 @@ function FormPage() {
   return (
     <div className='h-[calc(100vh-7rem)] flex justify-center items-center'>
         <form onSubmit={}>
-          <h1 className='font-bold text-3xl'>Create Task</h1>
+          <h1 className='font-bold text-3xl'>
+            { !params.id ? "Create New Task" : "Update Task"}
+          </h1>
+          <button onClick={handleDelete} className='bg-red-500 px-3 py-1 rounded-md'>Delete</button>
             <input type='text' name="title" placeholder='Title' className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4' onChange={handleChange}/>
             <textarea name='description' placeholder='Description' className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4' rows={3} onChange={handleChange}></textarea>
             <button className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4 text-white hover:bg-gray-700 transition-colors duration-300 ease-in-out'>Save</button>
