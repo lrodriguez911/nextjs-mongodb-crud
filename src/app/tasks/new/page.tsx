@@ -12,8 +12,11 @@ function FormPage() {
 
   const getTask = async () => {
     const res = await fetch(`api/tasks/${params.id}`)
-    const data = res.json()
-    console.log(data);
+    const data = await res.json()
+    setNewTask({
+      title: data.title,
+      description: data.description
+    })
     
   }
   const createTask = async () => {
@@ -86,7 +89,7 @@ function FormPage() {
 
   useEffect(() => {
     if(params.id){
-      console.log("updating");
+      getTask();
       
     }
     
