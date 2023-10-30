@@ -52,7 +52,16 @@ function FormPage() {
     
   }
   const updateTask = async () => {
-
+    const res = await fetch(`/api/tasks/${params.id}`,{
+      method: "PUT",
+      body: JSON.stringify(newTask),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    const data = await res.json();
+    console.log(data);
+    
   }
 
   const handleDelete = async () => {
@@ -74,7 +83,7 @@ function FormPage() {
     if(!params.id){
       await createTask();
     }else {
-      console.log("updating");
+      updateTask()
       
     }
     
@@ -103,8 +112,8 @@ function FormPage() {
           </h1>
           <button onClick={handleDelete} className='bg-red-500 px-3 py-1 rounded-md'>Delete</button>
           </header>
-            <input type='text' name="title" placeholder='Title' className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4' onChange={handleChange}/>
-            <textarea name='description' placeholder='Description' className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4' rows={3} onChange={handleChange}></textarea>
+            <input type='text' name="title" placeholder='Title' className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4' onChange={handleChange} value={newTask.title}/>
+            <textarea name='description' placeholder='Description' className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4' rows={3} onChange={handleChange} value={newTask.description}></textarea>
             <button className='bg-gray-800 border-2 w-full p-4 rounded-lg my-4 text-white hover:bg-gray-700 transition-colors duration-300 ease-in-out' type='submit'>{
             !params.id ? "Create" : "Update"}</button>
         </form>
