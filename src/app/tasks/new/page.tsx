@@ -52,16 +52,21 @@ function FormPage() {
     
   }
   const updateTask = async () => {
-    const res = await fetch(`/api/tasks/${params.id}`,{
-      method: "PUT",
-      body: JSON.stringify(newTask),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-    const data = await res.json();
-    console.log(data);
-    
+    try {
+      const res = await fetch(`/api/tasks/${params.id}`,{
+        method: "PUT",
+        body: JSON.stringify(newTask),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const data = await res.json();
+      router.push("/")
+      router.refresh()
+    } catch (error) {
+      console.log(error);
+      
+    }
   }
 
   const handleDelete = async () => {
